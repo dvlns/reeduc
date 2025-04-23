@@ -11,10 +11,12 @@
         <h1>Lista Estudantes</h1>
         <a th:href="@{/estudantes/cadastrar}" class="btn btn-primary mb-3">Cadastrar</a>
         <table class="table table-striped">
-            <thead>
+`            <thead>
             <tr>
                 <th>#</th>
-                <th>Nome</th>
+               ` <th>Nome</th>
+                <th>CPF</th>
+
                 <th>Ações</th>
             </tr>
             </thead>
@@ -22,6 +24,8 @@
                 <tr th:each="estudantes : ${estudantes}">
                     <td th:text="${estudantes.id}"></td>
                     <td th:text="${estudantes.name}"></td>
+                    <td th:text="${estudantes.cpf}"></td>
+
                     <td>
                         <a href="#" class="btn btn-warning btn-sn">Editar</a>
                         <form method="post" style="display:inline;">

@@ -31,9 +31,10 @@ public class StudentController {
     }
 
     @PostMapping("/salvar")
-    public String saveStudent(@RequestParam String name) {
+    public String saveStudent(@RequestParam String name, String cpf) {
         Student student = new Student();
         student.setName(name);
+        student.setCpf(cpf);
         studentService.saveStudent(student);
         return "redirect:/estudantes";
     }
