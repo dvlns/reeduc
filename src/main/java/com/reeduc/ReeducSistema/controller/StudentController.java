@@ -4,10 +4,7 @@ import com.reeduc.ReeducSistema.model.Student;
 import com.reeduc.ReeducSistema.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/estudantes")
@@ -36,6 +33,33 @@ public class StudentController {
         student.setName(name);
         student.setCpf(cpf);
         studentService.saveStudent(student);
+        return "redirect:/estudantes";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String exibirEditStudent(@PathVariable Long id, Model model) {
+        Student student = studentService.getById(id);
+        if (student == null) {
+            return "redirect:/estudantes";
+        }
+        model.addAttribute("estudante", student);
+        return "estudantes/editar";
+    }
+
+    @PostMapping("/editar")
+    public String editStudent(@RequestParam Long id, @RequestParam String name, @RequestParam String cpf) {
+        Student student = studentService.getById(id);
+        if (student != null) {
+            student.setName(name);
+            student.setCpf(cpf);
+            studentService.saveStudent(student);
+        }
+        return "redirect:/estudantes";
+    }
+
+    @GetMapping("/excluir")
+    public String deleteStudent(@RequestParam Long id) {
+        studentService.deleteStudent(id);
         return "redirect:/estudantes";
     }
 }

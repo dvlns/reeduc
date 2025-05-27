@@ -1,0 +1,33 @@
+CREATE TABLE users (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE student (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE
+);
+
+CREATE TABLE teacher (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE
+);
+
+CREATE TABLE teacher_student (
+    teacher_id BIGINT NOT NULL,
+    student_id BIGINT NOT NULL,
+    PRIMARY KEY (teacher_id, student_id),
+    CONSTRAINT teacher_to_student_relation FOREIGN KEY (teacher_id) REFERENCES teacher(id) ON DELETE CASCADE,
+    CONSTRAINT student_to_teacher_relation FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE
+);
+
+CREATE TABLE post (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    user_id BIGINT NOT NULL,
+    CONSTRAINT post_user_relation FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
