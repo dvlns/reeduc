@@ -27,11 +27,18 @@
                     <td th:text="${estudantes.cpf}"></td>
 
                     <td>
-                        <a href="#" class="btn btn-warning btn-sn">Editar</a>
-                        <form method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
+                        <a th:href="@{/estudantes/editar/{id}(id=${estudantes.id})}"
+                           class="btn btn-warning btn-sm">
+                            Editar
+                        </a>
+
+                        <a th:href="@{/estudantes/excluir(id=${estudantes.id})}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Tem certeza que deseja excluir este estudante?')">
+                            Excluir
+                        </a>
                     </td>
+
                 </tr>
             </tbody>
         </table>
