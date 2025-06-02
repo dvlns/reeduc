@@ -1,48 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thyneleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Estudantes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <div class="container nt-4">
-        <h1>Lista Estudantes</h1>
-        <a th:href="@{/estudantes/cadastrar}" class="btn btn-primary mb-3">Cadastrar</a>
-        <table class="table table-striped">
-`            <thead>
-            <tr>
-                <th>#</th>
-               ` <th>Nome</th>
-                <th>CPF</th>
-
-                <th>Ações</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr th:each="estudantes : ${estudantes}">
-                    <td th:text="${estudantes.id}"></td>
-                    <td th:text="${estudantes.name}"></td>
-                    <td th:text="${estudantes.cpf}"></td>
-
-                    <td>
-                        <a th:href="@{/estudantes/editar/{id}(id=${estudantes.id})}"
-                           class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
-
-                        <a th:href="@{/estudantes/excluir(id=${estudantes.id})}"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Tem certeza que deseja excluir este estudante?')">
-                            Excluir
-                        </a>
-                    </td>
-
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container mt-4">
+    <h1>Lista de Estudantes</h1>
+    <a th:href="@{/estudantes/cadastrar}" class="btn btn-primary mb-3">Cadastrar</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="estudante : ${estudantes}">
+            <td th:text="${estudante.id}"></td>
+            <td th:text="${estudante.name}"></td>
+            <td th:text="${estudante.cpf}"></td>
+            <td>
+                <a th:href="@{/estudantes/editar/{id}(id=${estudante.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/estudantes/excluir(id=${estudante.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este estudante?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

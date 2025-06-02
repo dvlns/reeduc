@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Date;
 
 @Entity
 public class Teacher {
@@ -13,6 +14,18 @@ public class Teacher {
 
     private String name;
     private String cpf;
+    private String celular;
+    private String genero;
+    private String escolaridade;
+    private String historico_profissional;
+    private Date data_nascimento;
+    private String email;
+    private String nome_mae;
+    private String nome_pai;
+    private String estado_civil;
+    private String local_nascimento;
+    private Boolean possui_deficiencia;
+    private String qual_deficiencia;
 
     @ManyToMany
     @JoinTable(

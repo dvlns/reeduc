@@ -8,12 +8,52 @@ CREATE TABLE student (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL,
     cpf VARCHAR(14) NOT NULL UNIQUE
+    rji INTEGER,
+    celular VARCHAR(20),
+    genero VARCHAR(20) CHECK (genero IN ('Masculino', 'Feminino')),
+    escolaridade VARCHAR(30) CHECK (
+        escolaridade IN (
+            'fundamental incompleto', 'fundamental completo',
+            'médio incompleto', 'médio completo',
+            'superior incompleto', 'superior completo',
+            'pós-graduado', 'mestre', 'doutor'
+        )
+    ),
+    historico_profissional VARCHAR(255),
+    data_nascimento DATE,
+    email VARCHAR(100),
+    nome_mae VARCHAR(150),
+    nome_pai VARCHAR(150),
+    estado_civil VARCHAR(20) CHECK (estado_civil IN ('Solteiro', 'Casado', 'Divorciado', 'Viúvo', 'Outro')),
+    local_nascimento VARCHAR(2) CHECK (
+        local_nascimento IN (
+            'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO',
+            'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI',
+            'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+        )
+    ),
+    possui_deficiencia BOOLEAN,
+    qual_deficiencia VARCHAR(255)
 );
 
 CREATE TABLE teacher (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL,
-    cpf VARCHAR(14) NOT NULL UNIQUE
+    cpf VARCHAR(14) NOT NULL 
+    celular VARCHAR(20),
+    genero VARCHAR(20) CHECK (genero IN ('Masculino', 'Feminino')),
+    data_nascimento DATE,
+    email VARCHAR(100),
+    nome_mae VARCHAR(150),
+    nome_pai VARCHAR(150),
+    estado_civil VARCHAR(20) CHECK (estado_civil IN ('Solteiro', 'Casado', 'Divorciado', 'Viúvo', 'Outro')),
+    local_nascimento VARCHAR(2) CHECK (
+        local_nascimento IN (
+            'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO',
+            'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI',
+            'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+        )
+    ),
 );
 
 CREATE TABLE teacher_student (
