@@ -3,34 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Estudantes</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen">
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<div class="container mt-4">
-    <h1>Lista de Estudantes</h1>
-    <a th:href="@{/estudantes/cadastrar}" class="btn btn-primary mb-3">Cadastrar</a>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="estudante : ${estudantes}">
-            <td th:text="${estudante.id}"></td>
-            <td th:text="${estudante.name}"></td>
-            <td th:text="${estudante.cpf}"></td>
-            <td>
-                <a th:href="@{/estudantes/editar/{id}(id=${estudante.id})}" class="btn btn-warning btn-sm">Editar</a>
-                <a th:href="@{/estudantes/excluir(id=${estudante.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este estudante?')">Excluir</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+<div class="container mx-auto mt-8 px-4">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Lista de Estudantes</h1>
+
+    <a th:href="@{/estudantes/cadastrar}"
+       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow mb-6">
+        Cadastrar
+    </a>
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+        <table class="min-w-full border border-gray-200 divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">#</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Nome</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">CPF</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Ações</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+            <tr th:each="estudante : ${estudantes}" class="hover:bg-gray-50">
+                <td th:text="${estudante.id}" class="px-4 py-2 text-sm text-gray-600"></td>
+                <td th:text="${estudante.name}" class="px-4 py-2 text-sm text-gray-800"></td>
+                <td th:text="${estudante.cpf}" class="px-4 py-2 text-sm text-gray-800"></td>
+                <td class="px-4 py-2 text-sm">
+                    <a th:href="@{/estudantes/editar/{id}(id=${estudante.id})}"
+                       class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-1 px-3 rounded mr-2">
+                        Editar
+                    </a>
+                    <a th:href="@{/estudantes/excluir(id=${estudante.id})}"
+                       onclick="return confirm('Tem certeza que deseja excluir este estudante?')"
+                       class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
